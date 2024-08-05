@@ -17,10 +17,11 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование продукта")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(upload_to="media/", verbose_name="Изображение", blank=True, null=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name="Products")
     price = models.IntegerField(verbose_name="Цена")
     created_at = models.DateField(verbose_name="Дата создания")
     updated_at = models.DateField(verbose_name="Дата изменения")
+    manufactured_at = models.DateField(verbose_name="Дата производства", blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} {self.price} {self.description}"
