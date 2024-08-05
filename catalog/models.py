@@ -1,19 +1,30 @@
 from django.db import models
 
 
-class Product(models.Model):
-
-    def __str__(self):
-        pass
-
-    class Meta:
-        pass
-
-
 class Category(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Наименование категории")
+    description = models.TextField(verbose_name="Описание категории")
 
     def __str__(self):
-        pass
+        return f"{self.name} {self.description}"
 
     class Meta:
-        pass
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Наименование продукта")
+    description = models.TextField(verbose_name="Описание")
+    image = models.ImageField(upload_to="media/", verbose_name="Изображение", blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    price = models.IntegerField(verbose_name="Цена")
+    created_at = models.DateField(verbose_name="Дата создания")
+    updated_at = models.DateField(verbose_name="Дата изменения")
+
+    def __str__(self):
+        return f"{self.name} {self.price} {self.description}"
+
+    class Meta:
+        verbose_name = "Продукт"
+        verbose_name_plural = "Продукты"
