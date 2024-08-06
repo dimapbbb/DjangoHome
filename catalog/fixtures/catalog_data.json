@@ -1,0 +1,26 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 9,
+    "fields": {
+        "name": "names",
+        "description": "bla-bla-bla"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 10,
+    "fields": {
+        "name": "professions",
+        "description": "tra-ta-ta"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 11,
+    "fields": {
+        "name": "e[pirienc",
+        "description": "nra-na-na"
+    }
+}
+]
