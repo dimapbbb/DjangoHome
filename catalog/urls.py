@@ -11,4 +11,4 @@ urlpatterns = [
     path('', HomeView.as_view(), name='Home'),
     path('contacts/', ContactsView.as_view(), name='Contacts'),
     path('sample/', ProductListView.as_view(), name='Products'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

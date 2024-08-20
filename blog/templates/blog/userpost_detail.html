@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="width: 18rem;">
+  <img src="{{ object.image }}" class="card-img-top" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ object.title }}</h5>
+    <p class="card-text">{{ object.content }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{ object.creation_date }}</li>
+    <li class="list-group-item">{{ object.publication_sign }}</li>
+    <li class="list-group-item">{{ object.views_count }}</li>
+  </ul>
+  <div class="card-body">
+    <a href="{% url 'blog:update_post' object.pk %}" class="card-link">Редактировать</a>
+    <a href="{% url 'blog:delete_post' object.pk %}" class="card-link">Удалить</a>
+  </div>
+</div>
+{% endblock %}
