@@ -1,32 +1,50 @@
-from django.shortcuts import render
+from django.views.generic import ListView, TemplateView
 
 from catalog.models import Product
 
 
-def home(request):
-    context = {
-        'title': "Skystore"
-    }
-    return render(request, 'home.html', context)
+class HomeView(TemplateView):
+    """
+    Просмотр домашней страницы
+    """
+    template_name = "catalog/home.html"
+
+    def get_context_data(self, **kwargs):
+        """ Получение контекста """
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Skystore"
+        return context
 
 
-def contacts(request):
-    if request.method == 'POST':
+class ContactsView(TemplateView):
+    """ Просмотр страницы контактов """
+    template_name = "catalog/contacts.html"
+
+    def post(self, request, **kwargs):
+        """ Обработка POST запроса"""
+        context = self.get_context_data(**kwargs)
         name = request.POST.get('name')
         phone = request.POST.get('phone')
         message = request.POST.get('message')
         print(name, phone, message)
 
-    context = {
-        'title': "Контакты"
-    }
-    return render(request, 'contacts.html', context)
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        """ Получение данных контекста """
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Контакты"
+        return context
 
 
-def sample_product(request):
-    product_list = Product.objects.all()
-    context = {
-        "object_list": product_list,
-        "title": "Продукты"
-    }
-    return render(request, 'sample_product.html', context)
+class ProductListView(ListView):
+    """
+    Просмотр страницы продуктов
+    """
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        """ Получение данных контекста"""
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Продукты"
+        return context
