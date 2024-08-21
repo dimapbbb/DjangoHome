@@ -8,9 +8,10 @@
     <p class="card-text">{{ object.content }}</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{ object.creation_date }}</li>
-    <li class="list-group-item">{{ object.publication_sign }}</li>
-    <li class="list-group-item">{{ object.views_count }}</li>
+    <li class="list-group-item">Дата создания: {{ object.creation_date }}</li>
+    <li class="list-group-item">slug: {{ object.slug }}</li>
+    <li class="list-group-item">Знак публикации: {{ object.publication_sign }}</li>
+    <li class="list-group-item">Просмотры: {{ object.views_count }}</li>
   </ul>
   <div class="card-body">
     <a href="{% url 'blog:update_post' object.pk %}" class="card-link">Редактировать</a>
