@@ -10,7 +10,8 @@
         <div class="card mb-4 box-shadow">
             <img class="card-img-top" src="{{ object.image | mod_path }}" alt="Card image cap">
             <div class="card-body">
-                <p class="card-text">{{object}}</p>
+                <p class="card-text">{{ object.name }}</p>
+                <p class="card-text">Version: {{object.version}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:view_product' object.pk %}">Просмотр</a>
