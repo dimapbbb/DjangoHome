@@ -28,3 +28,18 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+
+
+class Version(models.Model):
+    name = models.CharField(max_length=150, verbose_name="Название версии")
+    number = models.CharField(max_length=10, verbose_name="Номер версии")
+    current = models.BooleanField(verbose_name="Признак текущей версии")
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} - {self.number}"
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"

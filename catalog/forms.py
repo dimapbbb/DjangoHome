@@ -11,15 +11,15 @@ class ProductForm(forms.ModelForm):
         fields = ('name', 'description', 'image', 'price', 'category')
 
     def clean_name(self):
-        cleaned_data = self.cleaned_data.get('name').split()
+        cleaned_data = self.cleaned_data.get('name')
         for word in self.ban_words:
-            if word in cleaned_data:
+            if word in cleaned_data.split():
                 raise forms.ValidationError('Недопустимое слово в имени')
         return cleaned_data
 
     def clean_description(self):
-        cleaned_data = self.cleaned_data.get('description').split()
+        cleaned_data = self.cleaned_data.get('description')
         for word in self.ban_words:
-            if word in cleaned_data:
+            if word in cleaned_data.split():
                 raise forms.ValidationError('Недопустимое слово в описании')
         return cleaned_data
