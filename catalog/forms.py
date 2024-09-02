@@ -1,9 +1,14 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 
-class ProductForm(forms.ModelForm):
+class StyleFormMixin:
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class ProductForm(StyleFormMixin, forms.ModelForm):
     ban_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
     class Meta:
@@ -23,3 +28,10 @@ class ProductForm(forms.ModelForm):
             if word in cleaned_data.split():
                 raise forms.ValidationError('Недопустимое слово в описании')
         return cleaned_data
+
+
+class VersionForm(StyleFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = Version
+        fields = ('name', 'number', 'current')
