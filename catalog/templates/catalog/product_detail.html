@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-text">{{ object.description }}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Версия: {{ version.number }}</li>
+        <li class="list-group-item">Цена: {{ object.price }}</li>
+        <li class="list-group-item">Категория: {{ object.category }}</li>
+        <li class="list-group-item">Дата создания: {{ object.created_at }}</li>
+    </ul>
+    <div class="card-body">
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:update_product' object.pk %}">Редактировать</a>
+        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:delete_product' object.pk %}">Удалить</a>
+
+    </div>
+</div>
+{% endblock %}

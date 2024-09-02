@@ -4,22 +4,24 @@
 {% block content %}
 
 <div class="row">
-  {% for object in object_list %}
-  <div class="col-md-4">
-    <div class="card mb-4 box-shadow">
-      <img class="card-img-top" src="{{ object.image | mod_path }}" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">{{object}}</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-          </div>
+    <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:create_product' %}">Добавить продукт</a>
+    {% for object in object_list %}
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="{{ object.image | mod_path }}" alt="Card image cap">
+            <div class="card-body">
+                <p class="card-text">{{ object.name }}</p>
+                <p class="card-text">Version: {{object.version}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:view_product' object.pk %}">Просмотр</a>
+                        <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:update_product' object.pk %}">Редактировать</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  {% endfor %}
+    {% endfor %}
 </div>
 
 {% endblock %}
