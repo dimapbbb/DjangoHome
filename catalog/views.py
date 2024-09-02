@@ -1,4 +1,5 @@
-from django.views.generic import ListView, TemplateView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 
 from catalog.models import Product
 
@@ -48,3 +49,24 @@ class ProductListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = "Продукты"
         return context
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'price', 'category')
+    success_url = reverse_lazy('catalog:products')
+
+
+class ProductDetailView(DetailView):
+    model = Product
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ('name', 'description', 'image', 'price', 'category')
+    success_url = reverse_lazy('catalog:products')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('catalog:products')
