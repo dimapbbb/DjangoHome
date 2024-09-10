@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Наименование категории")
@@ -14,6 +16,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=100, verbose_name="Наименование продукта")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(upload_to="products_photo", verbose_name="Изображение", blank=True, null=True)
