@@ -1,6 +1,7 @@
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
@@ -40,11 +41,13 @@ class ContactsView(TemplateView):
         return context
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     """
     Просмотр страницы продуктов
     """
     model = Product
+    login_url = "/users"
+    redirect_field_name = "redirect_to"
 
     def get_context_data(self, **kwargs):
         """ Получение данных контекста"""
@@ -76,6 +79,7 @@ class ProductCreateView(CreateView):
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
         self.object = form.save()
+        self.object.user = self.request.user
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
