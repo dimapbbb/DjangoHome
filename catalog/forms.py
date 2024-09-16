@@ -8,12 +8,19 @@ class StyleFormMixin:
         super().__init__(*args, **kwargs)
 
 
+class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published')
+
+
 class ProductForm(StyleFormMixin, forms.ModelForm):
     ban_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
     class Meta:
         model = Product
-        fields = ('name', 'description', 'image', 'price', 'category')
+        fields = ('name', 'description', 'image', 'price', 'category', "is_published")
 
     def clean_name(self):
         cleaned_data = self.cleaned_data.get('name')
