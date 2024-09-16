@@ -22,6 +22,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to="products_photo", verbose_name="Изображение", blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True, related_name="Products")
     price = models.IntegerField(verbose_name="Цена")
+    is_published = models.BooleanField(default=False, verbose_name="Признак публикации")
     created_at = models.DateField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateField(auto_now=True, verbose_name="Дата изменения")
 
@@ -31,6 +32,11 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
+        permissions = [
+            ("can_change_publication", "can_change_publication"),
+            ("can_change_description", "can_change_description"),
+            ("can_change_category", "can_change_category")
+        ]
 
 
 class Version(models.Model):
