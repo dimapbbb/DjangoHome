@@ -14,6 +14,8 @@
     <div class="card-body">
         {% if user == object.user or object.prems %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:update_product' object.pk %}">Редактировать</a>
+        {% endif %}
+        {% if user == object.user %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'catalog:delete_product' object.pk %}">Удалить</a>
         {% endif %}
     </div>
