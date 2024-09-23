@@ -5,7 +5,8 @@ from django.views.generic import ListView, TemplateView, CreateView, DetailView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Version
+from catalog.models import Product, Version, Category
+from catalog.services import get_categories
 
 
 class HomeView(TemplateView):
@@ -147,3 +148,12 @@ class ProductUpdateView(UpdateView):
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products')
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    login_url = "/users"
+    redirect_field_name = "redirect_to"
+
+    def get_queryset(self):
+        return get_categories()
