@@ -103,3 +103,10 @@ EMAIL_HOST_USER = "genadjev.edmund@yandex.ru"
 EMAIL_HOST_PASSWORD = "upoxakalhlxbiqcu"
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
